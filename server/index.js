@@ -8,6 +8,7 @@ const bodyParser    = require('body-parser');
 const app           = express();
 const compass       = require('compass');
 const cookieSession  = require('cookie-session');
+const morgan = require('morgan')
 
 app.use(compass());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -22,6 +23,7 @@ app.use(cookieSession({
   keys: ["eec666442edbb434c822db6fdfe204d004c3d7b1"],
   maxAge: 246060100
 }));
+app.use(morgan('combined'));
 
 // imports helper functions for database
 const fn = require('./lib/functions.js');
