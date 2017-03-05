@@ -3,13 +3,13 @@ const searchRoute = require('express').Router();
 module.exports = (fn) => {
   searchRoute.get('/', (req, res) => {
     // search posts for related content.
-    const val = req.query.search;
-    fn.getSearchDataFromPosts(val, (postIdArray) => {
-      const ids = [];
+    const searchWord = req.query.search;
+    fn.getSearchDataFromPosts(searchWord, (postIdArray) => {
+      const postIds = [];
       postIdArray.forEach( (id) => {
-        ids.push(Number(id));
+        postIds.push(Number(id));
       });
-      fn.getPostsbyPostIdArray(ids, (posts) => {
+      fn.getPostsbyPostIdArray(postIds, (posts) => {
         res.send(posts);
       });
     });

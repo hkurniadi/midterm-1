@@ -7,8 +7,8 @@ const userRoute  = require('express').Router();
 module.exports = function(fn) {
 
   userRoute.get('/', (req, res) => {
-    const user_id = req.session.userID[0].id;
-    fn.getAllPostsOfUser(user_id, (posts) => {
+    const userId = req.session.userID[0].id;
+    fn.getAllPostsOfUser(userId, (posts) => {
       res.json(posts);
     });
   });

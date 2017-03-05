@@ -5,13 +5,13 @@ const userOwnLikesRoute = require('express').Router();
 module.exports = function(fn) {
 
   userOwnLikesRoute.get('/', (req, res) => {
-    const user_id = req.session.userID[0].id;
-    fn.getUserOwnLikes(user_id, (postIdArray) => {
-      const ids = [];
+    const userId = req.session.userID[0].id;
+    fn.getUserOwnLikes(userId, (postIdArray) => {
+      const postIds = [];
       postIdArray.forEach( (id) => {
-        ids.push(id.post_id);
+        postIds.push(id.post_id);
       });
-      fn.getPostsbyPostIdArray(ids, (posts) => {
+      fn.getPostsbyPostIdArray(postIds, (posts) => {
         res.send(posts);
       });
     });

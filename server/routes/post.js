@@ -28,13 +28,13 @@ module.exports = function(fn) {
     // }
 
     if (true) {
-      let postID = req.query.postid;
-      fn.getPost(postID, (post)=> {
+      let postId = req.query.postid;
+      fn.getPost(postId, (post)=> {
         fn.findUserById(post[0].user_id, (handle) => {
-          fn.getLikes(postID, (likes) => {
+          fn.getLikes(postId, (likes) => {
             // TODO rating not yet implimented due to bugs
-            fn.getRating(postID, req.session.userID[0].id, (rating) => {
-              fn.getComments(postID, (comments) => {
+            fn.getRating(postId, req.session.userID[0].id, (rating) => {
+              fn.getComments(postId, (comments) => {
                 post[0].likes = likes[0];
                 post[0].handle = handle[0].handle;
                 post[0].comments = comments;
@@ -49,14 +49,14 @@ module.exports = function(fn) {
 
   postRoute.post('/', (req, res) => {
     if(req.session.userID){
-      let user_id = req.session.userID[0].id;
+      let userId = req.session.userID[0].id;
       // TODO: clear URL's from #, messes with AJAX
       let url = req.body.url;
       let title = req.body.title;
       let content = req.body.content;
       let tag = req.body.tag;
       fn.createPost({
-        user_id: user_id,
+        user_id: userId,
         url: url,
         title: title,
         content: content,
@@ -70,9 +70,6 @@ module.exports = function(fn) {
       res.redirect('/login');
       return;
     }
-
   });
-
   return postRoute;
-
 };

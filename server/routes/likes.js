@@ -4,14 +4,14 @@ module.exports = function(fn) {
 
   likesRoute.post('/', (req, res) => {
     if(req.body.postid && req.body.like){
-      let postID = req.body.postid;
-      let userID = req.session.userID[0].id;
-      fn.incLikes(postID, userID, (likes) => {
+      let postId = req.body.postid;
+      let userId = req.session.userID[0].id;
+      fn.incLikes(postId, userId, (likes) => {
         res.send(likes);
       });
 
     } else {
-      fn.getLikes(req.body.postid, (likes) => {
+      fn.getLikes(postId, (likes) => {
         res.send(likes);
         return;
       });

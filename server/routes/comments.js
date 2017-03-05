@@ -6,16 +6,16 @@ module.exports = function(fn) {
   //return the newly created comment to that post
   //along with the post id, comment content commenter's user id, handle,
   commentsRoute.post('/', (req, res) => {
-    const postID = req.body.postid;
-    const userID = req.session.userID[0].id;
+    const postId = req.body.postid;
+    const userId = req.session.userID[0].id;
     const content = req.body.content;
     const comment = {
-      postID: postID,
-      userID: userID,
+      postID: postId,
+      userID: userId,
       content: content
     };
     fn.createComment(comment, () => {
-      fn.getComments(postID, (comments) => {
+      fn.getComments(postId, (comments) => {
         res.send(comments);
         return;
       })
